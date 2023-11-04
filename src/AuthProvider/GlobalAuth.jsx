@@ -21,6 +21,7 @@ const GlobalAuth =({children})=> {
         setLoader(true);
         return signInWithPopup(auth, Provider);
     }
+    
     const login = (email, password) => {
         setLoader(true);
         return signInWithEmailAndPassword(auth, email, password);
