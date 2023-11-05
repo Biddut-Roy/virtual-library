@@ -9,6 +9,8 @@ import ViewDetails from "../Pages/Home/categoryCard/ViewDetails";
 import Private from "../PrivateRoute/Private";
 import Error from "../Errorpage/Error";
 import ReedMore from "../Pages/Home/categoryCard/ReedMore";
+import Books from "../Pages/AllBoks/Books";
+import Borrow from "../Pages/BorrowPage/Borrow";
 
 
 
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
         {
             path:"/read",
             element:<ReedMore></ReedMore>
+        },
+        {
+            path:"/allBook",
+            element:<Books></Books>
+        },
+        {
+            path:"/borrowed",
+            element:<Borrow></Borrow>
         }
       ],
     },

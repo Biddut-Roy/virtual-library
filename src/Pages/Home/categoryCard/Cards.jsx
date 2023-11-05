@@ -21,7 +21,7 @@ const Cards = ({ item }) => {
                         count={5}
                         size={20}
                         color2={'#ffd700'}
-                        value={parseInt(rating)}
+                        value={rating}
                         edit={false}
                         />
                         
