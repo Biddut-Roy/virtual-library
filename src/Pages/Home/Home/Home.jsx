@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import Category from "../Category/Category";
 import SwiperSlider from "./SwiperSlider";
+import Writer from "./Writer/Writer";
 
 
 const Home = () => {
@@ -14,6 +15,9 @@ const Home = () => {
                 {
                     categoryData.map(category => <Category item={category} key={category._id}></Category>)
                 }
+            </div>
+            <div>
+                <Writer></Writer>
             </div>
         </div>
     );
