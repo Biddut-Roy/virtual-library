@@ -5,22 +5,27 @@ import ReactStars from "react-stars";
 import useAuth from "../../../Hooks/useAuth";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+import Lottie from "lottie-react";
+import loading from "../../../../public/animation/loading.json"
+import { useQuery } from "@tanstack/react-query";
 
 
 
 const ViewDetails = () => {
     const itemCard = useLoaderData()
-    const { name, rating, photo, author, category, quantity , _id} = itemCard;
+    const { name, rating, photo, author, category, quantity, _id } = itemCard;
     const { user } = useAuth();
-    const [currentQuentity , setCurrentQuentity] = useState(quantity)
+    const [currentQuentity, setCurrentQuentity] = useState(quantity)
     const currentDate = new Date();
     const [returnDate, setReturnDate] = useState(new Date());
     const email = user.email;
     const displayName = user.displayName
-    
-   
+    const qnt = currentQuentity - 1;
+    const qnt1 = { qnt };
+
 
     const borrowData = {
+        _id,
         name,
         rating,
         photo,
@@ -30,29 +35,49 @@ const ViewDetails = () => {
         currentDate,
         email,
         displayName,
+        qnt,
     }
-const qnt = currentQuentity - 1 ;
-const qnt1 = {qnt} ;
+
+
+
+    const { isPending, error, data: borrowed } = useQuery({
+        queryKey: ['writer'],
+        queryFn: () =>
+            fetch("http://localhost:5000/borrow")
+                .then((res) => res.json())
+    })
+
+    if (isPending) return <Lottie className=" mx-auto h-24 md:h-32 lg:h-96 w-10/12" animationData={loading} loop={true} />
+    if (error) return 'An error has occurred: ' + error.message
+    console.log(borrowed);
+
+
 
     const handelBorrow = () => {
-        
-        axios.post('http://localhost:5000/borrow', borrowData)
-            .then(res => {
-                console.log(res);
-                if (res.data.insertedId) {
-                    setCurrentQuentity(currentQuentity - 1)
-                    axios.patch(`http://localhost:5000/item-update/${_id}`, qnt1)
-                        .then(()=> {
-                            toast.success('Book borrowed successfully')
-                        })
-                        .catch(error => console.error(error));
+        const isexit = borrowed?.find(borror => borror._id === _id)
+        if (!isexit) {
+            axios.post('http://localhost:5000/borrow', borrowData)
+                .then(res => {
+                    console.log(res);
+                    if (res.data.insertedId) {
+                        setCurrentQuentity(currentQuentity - 1)
+                        axios.patch(`http://localhost:5000/item-update/${_id}`, qnt1)
+                            .then(() => {
+                                toast.success('Book borrowed successfully')
+                            })
+                            .catch(error => console.error(error));
 
-                    
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
+
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+        else{
+            toast.error("already borrow this Book")
+        }
+
     }
 
     return (
@@ -71,7 +96,7 @@ const qnt1 = {qnt} ;
                             count={5}
                             size={20}
                             color2={'#ffd700'}
-                            value={parseInt(rating)}
+                            value={parseFloat(rating)}
                             edit={false}
                         />
 
@@ -106,9 +131,9 @@ const qnt1 = {qnt} ;
                 </div>
             </div>
             <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+                position="top-center"
+                reverseOrder={false}
+            />
         </div>
     );
 };

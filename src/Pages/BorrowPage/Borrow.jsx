@@ -17,7 +17,7 @@ const Borrow = () => {
     if (error) return 'An error has occurred: ' + error.message
 
     return (
-        <div>
+        <div className=" w-11/12 mx-auto grid md:grid-cols-2 lg:grid-cols-2 gap-6 my-7">
             {
                 borrowed?.map(borrow => <Borrowedcard borrowed={borrow} key={borrow._id}></Borrowedcard>)
             }
