@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/Fc";
 import { Link, useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import auth from "../../Firebase/Firebase.int";
+import axios from "axios";
 
 
 
@@ -23,6 +24,7 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         const img = form.img.value;
+        const body = {name , email, password, img}
         if (password.length < 6) {
             setError('Password must be at least 6 characters long.')
             return;
@@ -40,18 +42,27 @@ const Register = () => {
         .then(() => {
             updateProfile(auth.currentUser, {
                 displayName:name, photoURL:img
-              }).then((result) => {
+              }).then(() => {
                 // Profile updated!
-                // ...
-                console.log(result.user);
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Your Registration Success',
-                    showConfirmButton: false,
-                    timer: 1500
+                // ... database data add 
+                axios.post('http://localhost:5000/user', body)
+                  .then(res=>{
+                    console.log(res.data);
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your Registration Success',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                          navigate("/")
+                    }  
                   })
-                  navigate("/")
+                  .catch(error=>{
+                    console.log(error);
+                  });
+               
               }).catch((error) => {
                 // An error occurred
                 // ...
@@ -76,6 +87,7 @@ const Register = () => {
      const handelGoogleLogin = () => {
         signInGoogle()
             .then((result) => {
+                console.log(result.photoURL , result.displayName , result.email );
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -83,7 +95,7 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                //   navigate(location?.state? location.state : "/" )
+                navigate('/')
                 console.log(result.user);
             })
             .catch((error) => {
