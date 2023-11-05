@@ -2,12 +2,13 @@ import Lottie from "lottie-react";
 import lock from '../../../public/animation/lock.json'
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/Fc';
 
 
 const Login = () => {
-
+    const navigate = useNavigate();
+    const location = useLocation();
     const { signInGoogle, login } = useAuth()
     const handelLogin = e => {
         e.preventDefault();
@@ -24,7 +25,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                //   navigate(location?.state? location.state : "/" )
+                  navigate(location?.state? location.state : "/" )
                 console.log(userCredential);
             })
             .catch((error) => {

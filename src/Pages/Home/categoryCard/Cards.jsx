@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ReactStars from 'react-stars'
 
 
@@ -6,7 +7,7 @@ import ReactStars from 'react-stars'
 
 const Cards = ({ item }) => {
 
-    const { name, rating, photo, author } = item;
+    const { name, rating, photo, author , _id } = item;
     return (
         <div className="card card-side bg-base-100 shadow-xl">
             <div>
@@ -20,12 +21,13 @@ const Cards = ({ item }) => {
                         count={5}
                         size={20}
                         color2={'#ffd700'}
-                        value={rating}
+                        value={parseInt(rating)}
+                        edit={false}
                         />
                         
                 </div>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">View Details</button>
+                    <Link to={`/details/${_id}`}><button className="btn btn-primary">View Details</button></Link>
                 </div>
             </div>
         </div>
@@ -38,6 +40,7 @@ Cards.propTypes = {
         rating: PropTypes.string.isRequired,
         photo: PropTypes.string.isRequired,
         author: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
     }).isRequired,
 };
 

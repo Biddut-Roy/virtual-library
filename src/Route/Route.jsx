@@ -5,6 +5,10 @@ import Login from "../Pages/Login and Register/Login";
 import Register from "../Pages/Login and Register/Register";
 import Add from "../Pages/Add page/Add";
 import CategoryCards from "../Pages/Home/categoryCard/CategoryCards";
+import ViewDetails from "../Pages/Home/categoryCard/ViewDetails";
+import Private from "../PrivateRoute/Private";
+import Error from "../Errorpage/Error";
+import ReedMore from "../Pages/Home/categoryCard/ReedMore";
 
 
 
@@ -13,6 +17,7 @@ const router = createBrowserRouter([
     {
       path: "/",
       element: <Root></Root>,
+      errorElement: <Error></Error>,
       children: [
         {
           path: "/",
@@ -36,6 +41,15 @@ const router = createBrowserRouter([
           element: <CategoryCards></CategoryCards>,
           loader:({params}) =>fetch(`http://localhost:5000/categorybooks/${params.category}`)
         },
+        {
+            path: "/details/:id",
+            element: <Private><ViewDetails></ViewDetails></Private>,
+            loader:({params}) =>fetch(`http://localhost:5000/details/${params.id}`)
+        },
+        {
+            path:"/read",
+            element:<ReedMore></ReedMore>
+        }
       ],
     },
   ]);

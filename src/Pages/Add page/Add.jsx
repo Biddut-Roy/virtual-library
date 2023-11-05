@@ -15,7 +15,7 @@ const Add = () => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
-        const quantity = form.quantity.value;
+        const quantity = parseInt(form.quantity.value);
         const author = form.Author.value;
         const photo = form.photo.value;
         const description = form.description.value;
