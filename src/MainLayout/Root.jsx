@@ -5,7 +5,7 @@ import Footer from "../Pages/staticPage/Footer";
 
 const Root = () => {
     return (
-        <div className=" max-w-[1200px] mx-auto">
+        <div className=" lg:w-11/12 mx-auto">
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>
