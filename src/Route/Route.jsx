@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login and Register/Login";
 import Register from "../Pages/Login and Register/Register";
 import Add from "../Pages/Add page/Add";
+import CategoryCards from "../Pages/Home/categoryCard/CategoryCards";
 
 
 
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
         {
           path: "/addBook",
           element: <Add></Add>,
+        },
+        {
+          path: "/categoryCards/:category",
+          element: <CategoryCards></CategoryCards>,
+          loader:({params}) =>fetch(`http://localhost:5000/categorybooks/${params.category}`)
         },
       ],
     },

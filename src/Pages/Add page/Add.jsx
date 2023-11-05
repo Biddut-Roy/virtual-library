@@ -1,9 +1,15 @@
+import axios from "axios";
 import Swal from "sweetalert2";
-
+import { useState } from 'react';
+import ReactStars from 'react-stars'
 
 
 const Add = () => {
-
+    // rating data collect
+    const [rating, setRating] = useState(2.5);
+    const handleRatingChange = (newRating) => {
+        setRating(newRating);
+    }
 
     const handelAdd = (e) => {
         e.preventDefault();
@@ -14,26 +20,20 @@ const Add = () => {
         const photo = form.photo.value;
         const description = form.description.value;
         const category = form.category.value;
-        const rating = form.rating.value;
         const data = { name, author, photo, description, category, rating, quantity }
-        console.log(data);
-        // fetch("https://top-auto-category-53sj6su0h-biddut-roys-projects.vercel.app/models", {
-        //     method: "POST",
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.insertedId) {
-        //             Swal.fire({
-        //                 icon: 'success',
-        //                 title: 'Success',
-        //                 text: 'Product has been added successfully',
-        //             })
-        //         }
-        //     })
+        axios.post('http://localhost:5000/books', data)
+            .then(function (response) {
+                if (response.data.insertedId) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Book has been added successfully',
+                    })
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
         form.reset();
     };
@@ -130,13 +130,14 @@ const Add = () => {
             {/* ratting */}
             <div className="relative z-0 w-full my-3 group">
                 <span className=" text-2xl">Rating: </span>
-                <div className="rating">
-                    <input type="radio" name="rating" value="1" id="1" required className="mask mask-star-2 bg-orange-400" />
-                    <input type="radio" name="rating" value="2" id="2" required className="mask mask-star-2 bg-orange-400" />
-                    <input type="radio" name="rating" value="3" id="3" required className="mask mask-star-2 bg-orange-400" />
-                    <input type="radio" name="rating" value="4" id="4" required className="mask mask-star-2 bg-orange-400" />
-                    <input type="radio" name="rating" value="5" id="5" required className="mask mask-star-2 bg-orange-400" />
-                </div>
+                <ReactStars
+                    name="rating"
+                    count={5}
+                    size={20}
+                    color2={'#ffd700'}
+                    value={rating}
+                    onChange={handleRatingChange}
+                />
             </div>
 
             <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5">Add Book</button>
