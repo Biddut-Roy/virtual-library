@@ -1,28 +1,50 @@
+import axios from "axios";
 import BooksCard from "./BooksCard";
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+
+
 
 
 const Books = () => {
-    const allBooks = useLoaderData()
-    const [data , setData] = useState(allBooks)
-    const [sort, setSort] = useState(false);
+    const [data, setData] = useState([])
+    const [sort, setSort] = useState(true);
+    const [sortData, setSortData] = useState([])
+
 
     const sorting = () => {
-        setSort(!sort)
+        setSort(!sort);
     }
 
-    if (sort) {
-        const sortingData = data?.filter(quantity => quantity.quantity !== 0)
-        setData(sortingData)
-    }
 
-console.log(sort);
+  
+
+    useEffect(()=>{
+        axios.get(`http://localhost:5000/allBook`)
+        .then(res=>{
+            setData(res.data)
+        })
+        .catch(error=>{
+            // handle error
+            console.log(error);
+        })
+    },[])
+// [{quantity :{$ge : 0}} ai logic kaj na korar jonno dabble time data get client site and server site] NOTE!
+    useEffect(()=>{
+        axios.get(`http://localhost:5000/sortBook`)
+        .then(res=>{
+            setSortData(res.data)
+        })
+        .catch(error=>{
+            // handle error
+            console.log(error);
+        })
+    },[])
 
     return (
         <div>
 
-            <label className="swap">
+            <label className="swap btn btn-primary ml-5">
                 <input onClick={sorting} type="checkbox" />
                 <div className="swap-on">Available</div>
                 <div className="swap-off">All</div>
@@ -30,7 +52,10 @@ console.log(sort);
 
             <div className=" w-11/12 mx-auto grid md:grid-cols-2 lg:grid-cols-2 gap-6 my-7">
                 {
-                    data?.map((bookItem , idx) => <BooksCard books={bookItem} key={idx}></BooksCard>)
+                    sort?
+                    data?.map((bookItem, idx) => <BooksCard books={bookItem} key={idx}></BooksCard>)
+                    :
+                    sortData?.map((bookItem, idx) => <BooksCard books={bookItem} key={idx}></BooksCard>)
                 }
             </div>
         </div>

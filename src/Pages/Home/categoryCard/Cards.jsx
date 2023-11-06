@@ -37,7 +37,7 @@ const Cards = ({ item }) => {
 Cards.propTypes = {
     item: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        rating: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
         photo: PropTypes.string.isRequired,
         author: PropTypes.string.isRequired,
         _id: PropTypes.string.isRequired,

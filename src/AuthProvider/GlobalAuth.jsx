@@ -2,6 +2,7 @@ import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged,
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/Firebase.int";
 import PropTypes from 'prop-types'; 
+import axios from "axios";
 
 
 
@@ -34,8 +35,25 @@ const GlobalAuth =({children})=> {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            const logUser = currentUser?.email || user?.email;
+            const logger = { email: logUser }
             setUser(currentUser);
             setLoader(false)
+            if (currentUser) {
+                axios.post('https://car-doctor-biddut-roys-projects.vercel.app/jwt', logger, { withCredentials: true })
+                    .then((res) => {
+                        console.log(res.data);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+            else{
+                axios.post('https://car-doctor-biddut-roys-projects.vercel.app/logout', logger, { withCredentials: true })
+                .then(res => {
+                    console.log(res.data);
+                })
+            }
         })
         return () => {
             unsubscribe();
