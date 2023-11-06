@@ -11,6 +11,7 @@ import Error from "../Errorpage/Error";
 import ReedMore from "../Pages/Home/categoryCard/ReedMore";
 import Books from "../Pages/AllBoks/Books";
 import Borrow from "../Pages/BorrowPage/Borrow";
+import Update from "../Pages/updatepage/Update";
 
 
 
@@ -55,12 +56,19 @@ const router = createBrowserRouter([
         },
         {
             path:"/allBook",
-            element:<Private><Books></Books></Private>
+            element:<Private><Books></Books></Private>,
+            loader:() =>fetch(`http://localhost:5000/addBook`)
+
         },
         {
             path:"/borrowed",
             element:<Private><Borrow></Borrow></Private>
-        }
+        },
+        {
+            path:"/update/:id",
+            element:<Private><Update></Update></Private>,
+            loader:({params}) =>fetch(`http://localhost:5000/details/${params.id}`)
+        },
       ],
     },
   ]);

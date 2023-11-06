@@ -51,7 +51,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                //   navigate(location?.state? location.state : "/" )
+                  navigate(location?.state? location.state : "/" )
                 console.log(result.user);
             })
             .catch((error) => {

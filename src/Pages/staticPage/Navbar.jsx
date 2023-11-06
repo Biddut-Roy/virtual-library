@@ -57,7 +57,7 @@ useEffect(() => {
               {list}
             </ul>
           </div>
-          <Link to={'/'}><a className="btn btn-ghost normal-case text-xl"><img className=" w-28 h-10" src="https://i.ibb.co/WzvggtD/logo.png" alt="Logo" /></a></Link>
+          <Link to={'/'} className="btn btn-ghost normal-case text-xl"><img className=" w-28 h-10" src="https://i.ibb.co/WzvggtD/logo.png" alt="Logo" /></Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

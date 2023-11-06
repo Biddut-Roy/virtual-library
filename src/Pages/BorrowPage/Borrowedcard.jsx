@@ -2,6 +2,7 @@ import ReactStars from "react-stars";
 import PropTypes from 'prop-types';
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 
 
@@ -25,7 +26,17 @@ const Borrowedcard = ({ borrowed , setBorroweds , borroweds}) => {
     const returnDates = `${returnY}-${returnMonth.toString().padStart(2, '0')}-${returnDay.toString().padStart(2, '0')}`;
 
     const handelDelete = (id) => {
-        axios.delete(`http://localhost:5000/borrow/${id}`)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Return it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/borrow/${id}`)
             .then(res => {
                 if (res.data.deletedCount > 0) {
                     axios.patch(`http://localhost:5000/item-update/${id}`, qnt1)
@@ -40,6 +51,8 @@ const Borrowedcard = ({ borrowed , setBorroweds , borroweds}) => {
             .catch(error => {
                 console.error(error);
             });
+            }});
+          
     }
 
 
