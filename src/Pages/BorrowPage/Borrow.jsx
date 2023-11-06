@@ -12,7 +12,7 @@ const Borrow = () => {
     const [borrowed , setBorrowed] = useState([]);
    
     useEffect(()=>{
-        axios.get(`http://localhost:5000/borrow?email=${email}`)
+        axios.get(`http://localhost:5000/borrows?email=${email}`, { withCredentials: true })
         .then(res=>{
             setBorrowed(res.data)
         })

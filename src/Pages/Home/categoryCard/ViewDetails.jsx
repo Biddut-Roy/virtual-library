@@ -16,16 +16,18 @@ const ViewDetails = () => {
     const { name, rating, photo, author, category, quantity, _id } = itemCard;
     const { user } = useAuth();
     const [currentQuentity, setCurrentQuentity] = useState(quantity)
+    const [open , setOpen] = useState(true);
     const currentDate = new Date();
     const [returnDate, setReturnDate] = useState(new Date());
     const email = user.email;
     const displayName = user.displayName
     const qnt = currentQuentity - 1;
     const qnt1 = { qnt };
+    const mainId = _id;
+
 
 
     const borrowData = {
-        _id,
         name,
         rating,
         photo,
@@ -36,6 +38,7 @@ const ViewDetails = () => {
         email,
         displayName,
         qnt,
+        mainId
     }
 
 
@@ -43,7 +46,7 @@ const ViewDetails = () => {
     const { isPending, error, data: borrowed } = useQuery({
         queryKey: ['writer'],
         queryFn: () =>
-            fetch("http://localhost:5000/borrow")
+            fetch(`http://localhost:5000/borrows?email=${email}`,{ withCredentials: true } )
                 .then((res) => res.json())
     })
 
@@ -54,21 +57,18 @@ const ViewDetails = () => {
 
 
     const handelBorrow = () => {
-        const isexit = borrowed?.find(borror => borror._id === _id)
-
+        const isexit = borrowed?.find(borror => borror.mainId === _id)
         if (!isexit) {
-            axios.post('http://localhost:5000/borrow', borrowData)
+            axios.post('http://localhost:5000/borrow', borrowData , { withCredentials: true })
                 .then(res => {
-                    console.log(res);
                     if (res.data.insertedId) {
                         setCurrentQuentity(currentQuentity - 1)
-                        axios.patch(`http://localhost:5000/item-update/${_id}`, qnt1)
+                        axios.patch(`http://localhost:5000/item-update/${_id}`, qnt1 , { withCredentials: true })
                             .then(() => {
                                 toast.success('Book borrowed successfully')
+                                setOpen(false)
                             })
                             .catch(error => console.error(error));
-
-
                     }
                 })
                 .catch(error => {
@@ -106,9 +106,11 @@ const ViewDetails = () => {
                         {
                             currentQuentity == 0 ? <button onClick={() => document.getElementById('borrow').showModal()} className="btn btn-outline btn-success" disabled >Borrow</button>
                                 :
-                                <button onClick={() => document.getElementById('borrow').showModal()} className="btn btn-outline btn-success" >Borrow</button>
+                                <button onClick={() => document.getElementById('borrow').showModal()} onBlur={()=> setOpen(true)} className="btn btn-outline btn-success" >Borrow</button>
                         }
-                        <dialog id="borrow" className="modal">
+                        {
+                            open ?
+                            <dialog id="borrow" className="modal">
                             <div className="modal-box">
                                 <form method="dialog">
                                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -125,6 +127,8 @@ const ViewDetails = () => {
 
                             </div>
                         </dialog>
+                        : " "
+                        }
                     </div>
                     <div className="card-actions justify-end">
                         <Link to={`/read/${_id}`}><button className="btn btn-primary">Read</button></Link>

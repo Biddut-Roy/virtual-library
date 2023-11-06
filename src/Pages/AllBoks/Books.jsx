@@ -1,26 +1,27 @@
 import axios from "axios";
 import BooksCard from "./BooksCard";
 import { useEffect, useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 
 
 
 
 
 const Books = () => {
+    const {user} = useAuth()
     const [data, setData] = useState([])
     const [sort, setSort] = useState(true);
     const [sortData, setSortData] = useState([])
 
+    const email = user.email;
 
     const sorting = () => {
         setSort(!sort);
     }
 
 
-  
-
     useEffect(()=>{
-        axios.get(`http://localhost:5000/allBook`)
+        axios.get(`http://localhost:5000/allBook/?email=${email}` , { withCredentials: true })
         .then(res=>{
             setData(res.data)
         })
@@ -31,7 +32,7 @@ const Books = () => {
     },[])
 // [{quantity :{$ge : 0}} ai logic kaj na korar jonno dabble time data get client site and server site] NOTE!
     useEffect(()=>{
-        axios.get(`http://localhost:5000/sortBook`)
+        axios.get(`http://localhost:5000/sortBook/?email=${email}`, { withCredentials: true })
         .then(res=>{
             setSortData(res.data)
         })

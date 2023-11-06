@@ -21,7 +21,7 @@ const Add = () => {
         const description = form.description.value;
         const category = form.category.value;
         const data = { name, author, photo, description, category, rating, quantity }
-        axios.post('http://localhost:5000/books', data)
+        axios.post('http://localhost:5000/books', data , { withCredentials: true })
             .then(function (response) {
                 if (response.data.insertedId) {
                     Swal.fire({

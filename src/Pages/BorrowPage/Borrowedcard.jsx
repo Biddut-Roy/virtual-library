@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 
 
 
-const Borrowedcard = ({ borrowed , setBorroweds , borroweds}) => {
- 
-    const { name, rating, photo, author, currentDate, returnDate, qnt: quantity, _id } = borrowed;
+const Borrowedcard = ({ borrowed, setBorroweds, borroweds }) => {
+
+    const { name, rating, photo, author, currentDate, returnDate, qnt: quantity, _id, mainId } = borrowed;
     const qnt = quantity + 1;
     const qnt1 = { qnt };
 
@@ -25,7 +25,8 @@ const Borrowedcard = ({ borrowed , setBorroweds , borroweds}) => {
     const returnDay = returnDateTime.getDate();
     const returnDates = `${returnY}-${returnMonth.toString().padStart(2, '0')}-${returnDay.toString().padStart(2, '0')}`;
 
-    const handelDelete = (id) => {
+
+    const handelDelete = (id, mainId) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -34,25 +35,28 @@ const Borrowedcard = ({ borrowed , setBorroweds , borroweds}) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, Return it!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete(`http://localhost:5000/borrow/${id}`)
-            .then(res => {
-                if (res.data.deletedCount > 0) {
-                    axios.patch(`http://localhost:5000/item-update/${id}`, qnt1)
-                        .then(() => {
-                           const remaining = borroweds.filter(booking => booking._id !== id);
-                           setBorroweds(remaining)
-                            toast.success('Book Return successful')
-                        })
-                        .catch(error => console.error(error));
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-            }});
-          
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            axios.patch(`http://localhost:5000/item-update/${mainId}`, qnt1)
+                                .then((res) => {
+                                    if (res.data.modifiedCount > 0) {
+                                        const remaining = borroweds.filter(booking => booking._id !== id);
+                                        setBorroweds(remaining)
+                                        toast.success('Book Return successful')
+                                    }
+                                })
+                                .catch(error => console.error(error));
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
+
     }
 
 
@@ -79,7 +83,7 @@ const Borrowedcard = ({ borrowed , setBorroweds , borroweds}) => {
                     <h1>Return date date: {returnDates}</h1>
                 </div>
                 <div className="card-actions justify-end">
-                    <button onClick={() => handelDelete(_id)} className="btn btn-primary">Return</button>
+                    <button onClick={() => handelDelete(_id, mainId)} className="btn btn-primary">Return</button>
                 </div>
             </div>
             <Toaster
@@ -100,7 +104,8 @@ Borrowedcard.propTypes = {
         returnDate: PropTypes.string.isRequired,
         qnt: PropTypes.number.isRequired,
         _id: PropTypes.string.isRequired,
-        
+        mainId: PropTypes.string.isRequired,
+
     }).isRequired,
     setBorroweds: PropTypes.func.isRequired,
     borroweds: PropTypes.array.isRequired,
