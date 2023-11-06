@@ -6,7 +6,7 @@ import BooksCard from "./BooksCard";
 
 const Books = () => {
     const { isPending, error, data} = useQuery({
-        queryKey: ['writer'],
+        queryKey: ['books'],
         queryFn: () =>
             fetch("http://localhost:5000/addBook")
             .then((res) => res.json())

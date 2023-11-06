@@ -32,7 +32,7 @@ const BooksCard = ({books}) => {
 };
 
 BooksCard.propTypes = {
-    books: PropTypes.arrayOf(
+    books: PropTypes.objectOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         rating: PropTypes.string.isRequired,

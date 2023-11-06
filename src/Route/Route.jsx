@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         },
         {
             path:"/borrowed",
-            element:<Borrow></Borrow>
+            element:<Private><Borrow></Borrow></Private>
         }
       ],
     },

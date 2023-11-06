@@ -49,12 +49,13 @@ const ViewDetails = () => {
 
     if (isPending) return <Lottie className=" mx-auto h-24 md:h-32 lg:h-96 w-10/12" animationData={loading} loop={true} />
     if (error) return 'An error has occurred: ' + error.message
-    console.log(borrowed);
+
 
 
 
     const handelBorrow = () => {
         const isexit = borrowed?.find(borror => borror._id === _id)
+
         if (!isexit) {
             axios.post('http://localhost:5000/borrow', borrowData)
                 .then(res => {
