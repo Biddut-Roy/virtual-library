@@ -46,7 +46,7 @@ const ViewDetails = () => {
     const { isPending, error, data: borrowed } = useQuery({
         queryKey: ['writer'],
         queryFn: () =>
-            fetch(`http://localhost:5000/borrows?email=${email}`,{ withCredentials: true } )
+            fetch(`https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/borrows?email=${email}`, )
                 .then((res) => res.json())
     })
 
@@ -59,11 +59,11 @@ const ViewDetails = () => {
     const handelBorrow = () => {
         const isexit = borrowed?.find(borror => borror.mainId === _id)
         if (!isexit) {
-            axios.post('http://localhost:5000/borrow', borrowData , { withCredentials: true })
+            axios.post('https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/borrow', borrowData , )
                 .then(res => {
                     if (res.data.insertedId) {
                         setCurrentQuentity(currentQuentity - 1)
-                        axios.patch(`http://localhost:5000/item-update/${_id}`, qnt1 , { withCredentials: true })
+                        axios.patch(`https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/item-update/${_id}`, qnt1 , )
                             .then(() => {
                                 toast.success('Book borrowed successfully')
                                 setOpen(false)

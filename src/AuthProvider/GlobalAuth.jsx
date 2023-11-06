@@ -40,7 +40,7 @@ const GlobalAuth =({children})=> {
             setUser(currentUser);
             setLoader(false)
             if (currentUser) {
-                axios.post('http://localhost:5000/jwt', logger, { withCredentials: true })
+                axios.post('https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/jwt', logger, { withCredentials: true })
                     .then((res) => {
                         console.log(res.data);
                     })
@@ -49,7 +49,7 @@ const GlobalAuth =({children})=> {
                     });
             }
             else{
-                axios.post('http://localhost:5000/logout', logger, { withCredentials: true })
+                axios.post('https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/logout', logger, { withCredentials: true })
                 .then(res => {
                     console.log(res.data);
                 })
@@ -58,7 +58,7 @@ const GlobalAuth =({children})=> {
         return () => {
             unsubscribe();
         }
-    }, [user?.email])
+    }, [])
 
 
     const info = { user , loader , createUser , signInGoogle , login , logOut}

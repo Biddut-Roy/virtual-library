@@ -1,8 +1,8 @@
 
 import Borrowedcard from "./Borrowedcard";
 import useAuth from "../../Hooks/useAuth";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import useAxios from "../../Hooks/useAxios";
 
 
 
@@ -10,9 +10,10 @@ const Borrow = () => {
     const { user } = useAuth();
     const email = user.email;
     const [borrowed , setBorrowed] = useState([]);
+    const isAxios = useAxios();
    
     useEffect(()=>{
-        axios.get(`http://localhost:5000/borrows?email=${email}`, { withCredentials: true })
+        isAxios.get(`/borrows?email=${email}`, )
         .then(res=>{
             setBorrowed(res.data)
         })
@@ -20,7 +21,7 @@ const Borrow = () => {
             // handle error
             console.log(error);
         })
-    },[email]);
+    },[email , isAxios]);
 
 
 

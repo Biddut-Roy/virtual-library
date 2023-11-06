@@ -21,7 +21,7 @@ const Books = () => {
 
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/allBook/?email=${email}` , { withCredentials: true })
+        axios.get(`https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/allBook/?email=${email}` , { withCredentials: true })
         .then(res=>{
             setData(res.data)
         })
@@ -29,10 +29,10 @@ const Books = () => {
             // handle error
             console.log(error);
         })
-    },[])
+    },[email])
 // [{quantity :{$ge : 0}} ai logic kaj na korar jonno dabble time data get client site and server site] NOTE!
     useEffect(()=>{
-        axios.get(`http://localhost:5000/sortBook/?email=${email}`, { withCredentials: true })
+        axios.get(`https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/sortBook/?email=${email}`, { withCredentials: true })
         .then(res=>{
             setSortData(res.data)
         })
@@ -40,7 +40,7 @@ const Books = () => {
             // handle error
             console.log(error);
         })
-    },[])
+    },[email])
 
     return (
         <div>

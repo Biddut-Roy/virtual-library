@@ -43,9 +43,7 @@ const Register = () => {
             updateProfile(auth.currentUser, {
                 displayName:name, photoURL:img
               }).then(() => {
-                // Profile updated!
-                // ... database data add 
-                axios.post('http://localhost:5000/user', body)
+                axios.post('https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/user', body)
                   .then(res=>{
                     console.log(res.data);
                     if (res.data.insertedId) {
