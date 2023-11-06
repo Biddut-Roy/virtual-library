@@ -11,7 +11,7 @@ const Cards = ({ item }) => {
     return (
         <div className="card card-side bg-base-100 shadow-xl">
             <div>
-                <figure><img className=" h-[320px] w-[200]" src={photo} alt="img" /></figure>
+                <figure><img className=" h-[320px] w-[200px]" src={photo} alt="img" /></figure>
             </div>
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>

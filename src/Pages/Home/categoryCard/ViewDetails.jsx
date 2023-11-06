@@ -127,7 +127,7 @@ const ViewDetails = () => {
                         </dialog>
                     </div>
                     <div className="card-actions justify-end">
-                        <Link to={"/read"}><button className="btn btn-primary">Read</button></Link>
+                        <Link to={`/read/${_id}`}><button className="btn btn-primary">Read</button></Link>
                     </div>
                 </div>
             </div>

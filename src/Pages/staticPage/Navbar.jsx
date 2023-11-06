@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
@@ -57,7 +57,7 @@ useEffect(() => {
               {list}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl"><img className=" w-28 h-10" src="https://i.ibb.co/WzvggtD/logo.png" alt="Logo" /></a>
+          <Link to={'/'}><a className="btn btn-ghost normal-case text-xl"><img className=" w-28 h-10" src="https://i.ibb.co/WzvggtD/logo.png" alt="Logo" /></a></Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

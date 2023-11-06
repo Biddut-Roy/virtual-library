@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/addBook",
-          element: <Add></Add>,
+          element: <Private><Add></Add></Private>,
         },
         {
           path: "/categoryCards/:category",
@@ -49,12 +49,13 @@ const router = createBrowserRouter([
             loader:({params}) =>fetch(`http://localhost:5000/details/${params.id}`)
         },
         {
-            path:"/read",
-            element:<ReedMore></ReedMore>
+            path:"/read/:id",
+            element:<Private><ReedMore></ReedMore></Private>,
+            loader:({params}) =>fetch(`http://localhost:5000/details/${params.id}`)
         },
         {
             path:"/allBook",
-            element:<Books></Books>
+            element:<Private><Books></Books></Private>
         },
         {
             path:"/borrowed",
