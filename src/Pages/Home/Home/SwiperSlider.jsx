@@ -23,23 +23,28 @@ const SwiperSlider = () => {
             },
           }}
       >
-        <SwiperSlide><img
+        <SwiperSlide>
+          <img
           src="https://i.ibb.co/8zxvmkh/1.jpg" 
           alt="img"
         /></SwiperSlide>
-        <SwiperSlide><img
+        <SwiperSlide>
+          <img
           src="https://i.ibb.co/PZ7NbsY/3.jpg" 
           alt="img"
         /></SwiperSlide>
-        <SwiperSlide><img
+        <SwiperSlide>
+          <img
           src="https://i.ibb.co/QYXVCc0/4.jpg" 
           alt="img"
         /></SwiperSlide>
-        <SwiperSlide><img
+        <SwiperSlide>
+          <img
           src="https://i.ibb.co/CHX66Nb/7.jpg" 
           alt="img"
         /></SwiperSlide>
-        <SwiperSlide><img
+        <SwiperSlide>
+          <img
           src="https://i.ibb.co/9rFrWM7/s.jpg" 
           alt="img"
         /></SwiperSlide>
