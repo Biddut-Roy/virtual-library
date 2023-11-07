@@ -43,7 +43,7 @@ const Register = () => {
             updateProfile(auth.currentUser, {
                 displayName:name, photoURL:img
               }).then(() => {
-                axios.post('http://localhost:5000/user', body)
+                axios.post('https://virtual-library-eight.vercel.app/user', body)
                   .then(res=>{
                     console.log(res.data);
                     if (res.data.insertedId) {
@@ -85,7 +85,7 @@ const Register = () => {
      const handelGoogleLogin = () => {
         signInGoogle()
             .then((result) => {
-                axios.put('http://localhost:5000/user',{email : result?.user?.email} )
+                axios.put('https://virtual-library-eight.vercel.app/user',{email : result?.user?.email} )
                   .then(res=>{
                     if (res.data.insertedId) {
                         Swal.fire({

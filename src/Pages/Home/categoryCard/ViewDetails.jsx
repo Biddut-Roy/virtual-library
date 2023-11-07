@@ -46,24 +46,24 @@ const ViewDetails = () => {
     const { isPending, error, data: borrowed } = useQuery({
         queryKey: ['borrow'],
         queryFn: () =>
-            fetch(`http://localhost:5000/borrows?email=${email}`,{ credentials: 'include'} )
+            fetch(`https://virtual-library-eight.vercel.app/borrows?email=${email}`,{ credentials: 'include'} )
                 .then((res) => res.json())
     })
 
     if (isPending) return <Lottie className=" mx-auto h-24 md:h-32 lg:h-96 w-10/12" animationData={loading} loop={true} />
     if (error) return 'An error has occurred: ' + error.message
 
-console.log(borrowed);
+
 
 
     const handelBorrow = () => {
         const isExit = borrowed?.find(borrow => borrow?.mainId === _id)
         if (!isExit) {
-            axios.post('http://localhost:5000/borrow', borrowData , )
+            axios.post('https://virtual-library-eight.vercel.app/borrow', borrowData , )
                 .then(res => {
                     if (res.data.insertedId) {
                         setCurrentQuentity(currentQuentity - 1)
-                        axios.patch(`http://localhost:5000/item-update/${_id}`, qnt1 , )
+                        axios.patch(`https://virtual-library-eight.vercel.app/item-update/${_id}`, qnt1 , )
                             .then(() => {
                                 toast.success('Book borrowed successfully')
                                 setOpen(false)

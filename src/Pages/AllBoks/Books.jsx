@@ -23,7 +23,7 @@ const Books = () => {
 
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/allBook/?email=${email}` , { withCredentials : true} )
+        axios.get(`https://virtual-library-eight.vercel.app/allBook/?email=${email}` , { withCredentials : true} )
         .then(res=>{
             setData(res.data)
         })
@@ -35,7 +35,7 @@ const Books = () => {
 
 // [{quantity :{$ge : 0}} ai logic kaj na korar jonno dabble time data get client site and server site] NOTE!
     useEffect(()=>{
-        axios.get(`http://localhost:5000/sortBook/?email=${email}`, { withCredentials : true} )
+        axios.get(`https://virtual-library-eight.vercel.app/sortBook/?email=${email}`, { withCredentials : true} )
         .then(res=>{
             setSortData(res.data)
         })
@@ -50,8 +50,8 @@ const Books = () => {
 
             <label className="swap btn btn-primary ml-5">
                 <input onClick={sorting} type="checkbox" />
-                <div className="swap-on">Available</div>
-                <div className="swap-off">All</div>
+                <div className="btn btn-circle swap-on">All</div>
+                <div className="btn btn-circle  swap-off">Available</div>
             </label>
 
             <div className=" w-11/12 mx-auto grid md:grid-cols-2 lg:grid-cols-2 gap-6 my-7">

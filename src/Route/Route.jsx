@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         {
           path: "/",
           element: <Home></Home>,
-          loader: ()=> fetch("http://localhost:5000/category")
+          loader: ()=> fetch("https://virtual-library-eight.vercel.app/category")
         },
         {
           path: "/login",
@@ -42,17 +42,17 @@ const router = createBrowserRouter([
         {
           path: "/categoryCards/:category",
           element: <CategoryCards></CategoryCards>,
-          loader:({params}) =>fetch(`http://localhost:5000/categorybooks/${params.category}`)
+          loader:({params}) =>fetch(`https://virtual-library-eight.vercel.app/categorybooks/${params.category}`)
         },
         {
             path: "/details/:id",
             element: <Private><ViewDetails></ViewDetails></Private>,
-            loader:({params}) =>fetch(`http://localhost:5000/details/${params.id}`)
+            loader:({params}) =>fetch(`https://virtual-library-eight.vercel.app/details/${params.id}`)
         },
         {
             path:"/read/:id",
             element:<Private><ReedMore></ReedMore></Private>,
-            loader:({params}) =>fetch(`http://localhost:5000/details/${params.id}`)
+            loader:({params}) =>fetch(`https://virtual-library-eight.vercel.app/details/${params.id}`)
         },
         {
             path:"/allBook",
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
         {
             path:"/update/:id",
             element:<Private><Update></Update></Private>,
-            loader:({params}) =>fetch(`http://localhost:5000/details/${params.id}`)
+            loader:({params}) =>fetch(`https://virtual-library-eight.vercel.app/details/${params.id}`)
         },
       ],
     },
