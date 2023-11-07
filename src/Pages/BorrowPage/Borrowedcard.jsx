@@ -37,10 +37,10 @@ const Borrowedcard = ({ borrowed, setBorroweds, borroweds }) => {
             confirmButtonText: 'Yes, Return it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/borrow/${id}`)
+                axios.delete(`https://virtual-library-eight.vercel.app/borrow/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
-                            axios.patch(`https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/item-update/${mainId}`, qnt1)
+                            axios.patch(`https://virtual-library-eight.vercel.app/item-update/${mainId}`, qnt1)
                                 .then((res) => {
                                     if (res.data.modifiedCount > 0) {
                                         const remaining = borroweds.filter(booking => booking._id !== id);

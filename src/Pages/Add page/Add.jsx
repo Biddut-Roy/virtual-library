@@ -21,7 +21,7 @@ const Add = () => {
         const description = form.description.value;
         const category = form.category.value;
         const data = { name, author, photo, description, category, rating, quantity }
-        axios.post('https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/books', data , { withCredentials: true })
+        axios.post('https://virtual-library-eight.vercel.app/books', data , { withCredentials: true })
             .then(function (response) {
                 if (response.data.insertedId) {
                     Swal.fire({

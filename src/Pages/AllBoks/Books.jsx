@@ -7,11 +7,13 @@ import useAuth from "../../Hooks/useAuth";
 
 
 
+
 const Books = () => {
     const {user} = useAuth()
     const [data, setData] = useState([])
     const [sort, setSort] = useState(true);
     const [sortData, setSortData] = useState([])
+
 
     const email = user.email;
 
@@ -21,7 +23,7 @@ const Books = () => {
 
 
     useEffect(()=>{
-        axios.get(`https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/allBook/?email=${email}` , { withCredentials: true })
+        axios.get(`https://virtual-library-eight.vercel.app/allBook/?email=${email}` , { withCredentials : true} )
         .then(res=>{
             setData(res.data)
         })
@@ -30,9 +32,10 @@ const Books = () => {
             console.log(error);
         })
     },[email])
+
 // [{quantity :{$ge : 0}} ai logic kaj na korar jonno dabble time data get client site and server site] NOTE!
     useEffect(()=>{
-        axios.get(`https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/sortBook/?email=${email}`, { withCredentials: true })
+        axios.get(`https://virtual-library-eight.vercel.app/sortBook/?email=${email}`, { withCredentials : true} )
         .then(res=>{
             setSortData(res.data)
         })

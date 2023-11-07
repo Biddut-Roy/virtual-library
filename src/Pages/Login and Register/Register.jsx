@@ -43,7 +43,7 @@ const Register = () => {
             updateProfile(auth.currentUser, {
                 displayName:name, photoURL:img
               }).then(() => {
-                axios.post('https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/user', body)
+                axios.post('https://virtual-library-eight.vercel.app/user', body)
                   .then(res=>{
                     console.log(res.data);
                     if (res.data.insertedId) {
@@ -85,16 +85,22 @@ const Register = () => {
      const handelGoogleLogin = () => {
         signInGoogle()
             .then((result) => {
-                console.log(result.photoURL , result.displayName , result.email );
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Google Log in success',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                navigate('/')
-                console.log(result.user);
+                axios.put('https://virtual-library-eight.vercel.app/user',{email : result?.user?.email} )
+                  .then(res=>{
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your Registration Success',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                          navigate("/")
+                    }  
+                  })
+                  .catch(error=>{
+                    console.log(error);
+                  });
             })
             .catch((error) => {
                 Swal.fire({

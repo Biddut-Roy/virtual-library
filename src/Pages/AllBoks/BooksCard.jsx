@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import ReactStars from "react-stars";
 import PropTypes from 'prop-types';
 
+
+
+
 const BooksCard = ({books}) => {
     const {name, rating, photo, author , category , _id } = books;
+
     return (
         <div className="card card-side bg-base-100 shadow-xl">
         <div>

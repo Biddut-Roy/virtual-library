@@ -66,7 +66,7 @@ useEffect(() => {
         </div>
         <div className="navbar-end space-x-2">
           <div className="hidden md:flex lg:flex">
-               <p>{user&& user.displayName}</p>
+               <p>{user&& user?.displayName}</p>
           </div>
           <div className=" w-10 h-10  ">
                <img className=" rounded-full" src={user? user.photoURL:``} alt="" />

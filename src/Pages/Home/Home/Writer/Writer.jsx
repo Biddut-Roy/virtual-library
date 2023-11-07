@@ -8,7 +8,7 @@ const Writer = () => {
     const { isPending, error, data: writers } = useQuery({
         queryKey: ['writer'],
         queryFn: () =>
-            fetch('https://books-library-mlx1kg794-biddut-roys-projects.vercel.app/writer')
+            fetch('https://virtual-library-eight.vercel.app/writer')
             .then((res) => res.json())
     })
 
