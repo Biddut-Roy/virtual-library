@@ -28,7 +28,7 @@ const Update = () => {
         const category = form.category.value;
         const data = { name, author, photo,  category, rating, quantity }
 
-        axios.patch(`https://virtual-library-eight.vercel.app/update/${id}`, data)
+        axios.patch(`http://localhost:5000/update/${id}`, data)
         .then((res) => {
           if(res.data.modifiedCount){
               toast.success('Book Update successful')

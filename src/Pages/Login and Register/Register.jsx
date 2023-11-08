@@ -43,9 +43,9 @@ const Register = () => {
             updateProfile(auth.currentUser, {
                 displayName:name, photoURL:img
               }).then(() => {
-                axios.post('https://virtual-library-eight.vercel.app/user', body)
+                axios.post('http://localhost:5000/user', body)
                   .then(res=>{
-                    console.log(res.data);
+                    console.log(res);
                     if (res.data.insertedId) {
                         Swal.fire({
                             position: 'top-end',
@@ -62,8 +62,6 @@ const Register = () => {
                   });
                
               }).catch((error) => {
-                // An error occurred
-                // ...
                 console.log(error.message);
               });
             
@@ -85,7 +83,7 @@ const Register = () => {
      const handelGoogleLogin = () => {
         signInGoogle()
             .then((result) => {
-                axios.put('https://virtual-library-eight.vercel.app/user',{email : result?.user?.email} )
+                axios.put('http://localhost:5000/users',{email : result?.user?.email} )
                   .then(res=>{
                     if (res.data.insertedId) {
                         Swal.fire({
