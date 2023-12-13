@@ -7,7 +7,7 @@ const CheckDonation = () => {
     const { isPending, error, refetch, data } = useQuery({
         queryKey: ['Donate-books'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/donate' , { withCredentials: true })
+            const res = await axios.get('https://virtual-library-eight.vercel.app/donate' , { withCredentials: true })
             return res.data
         }
     })

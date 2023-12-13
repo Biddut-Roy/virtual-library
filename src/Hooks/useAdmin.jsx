@@ -12,7 +12,7 @@ const useAdmin = () => {
         queryKey : [ user?.email , "isAdmin"],
         enabled: !loader,
         queryFn: async() =>{
-            const res = await axios.get(`http://localhost:5000/api/users/admin/${user?.email}` , { withCredentials: true })
+            const res = await axios.get(`https://virtual-library-eight.vercel.app/api/users/admin/${user?.email}` , { withCredentials: true })
             return res.data;
         }
     })
