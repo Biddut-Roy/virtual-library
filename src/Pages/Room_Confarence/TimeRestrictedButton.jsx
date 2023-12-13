@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const TimeRestrictedButtons = () => {
   const [isButton1Enabled, setIsButton1Enabled] = useState(false);
@@ -22,12 +23,12 @@ const TimeRestrictedButtons = () => {
 
   const handleClickButton1 = () => {
 
-    alert('Button 1 clicked!');
+    alert('Join Now');
   };
 
   const handleClickButton2 = () => {
 
-    alert('Button 2 clicked!');
+    alert('Wrong time , please  join a Right time!');
   };
 
   return (
@@ -35,15 +36,16 @@ const TimeRestrictedButtons = () => {
       {isButton1Enabled ? (
         <button
           onClick={handleClickButton1}
-          className="btn-accent btn-sm rounded-lg hover:Enabled from 2 PM to 4 PM"
+          className="btn-accent btn-sm rounded-lg"
         >
-          Join Conference
+          <NavLink to={"/conference"}>Join Conference</NavLink>
         </button>
       ) : (
         <button
           onClick={handleClickButton2}
-          className="btn-accent btn-sm rounded-lg hover:Enabled outside 2 PM to 4 PM"
+          className="btn-accent btn-sm rounded-lg"
         >
+          
           Join Conference(2 PM to 4 PM)
         </button>
       )}

@@ -15,6 +15,8 @@ import Update from "../Pages/updatepage/Update";
 import Donate from "../Pages/Donate_Book/Donate";
 import AdminRoute from "../PrivateRoute/AdminRoute";
 import CheckDonation from "../Pages/Donate_Book/CheckDonation";
+import HomePage from "../Pages/Room_Confarence/HomePage";
+import Room from "../Pages/Room_Confarence/Room/Room";
 
 
 
@@ -78,6 +80,16 @@ const router = createBrowserRouter([
             path:"/update/:id",
             element:<Private><Update></Update></Private>,
             loader:({params}) =>fetch(`http://localhost:5000/details/${params.id}`)
+        },
+
+        //  call section 
+        {
+          path: "/conference",
+          element:<Private><HomePage /></Private> ,
+        },
+        {
+          path: "/conference/room/:roomID",
+          element:<Private><Room /></Private>,
         },
       ],
     },
