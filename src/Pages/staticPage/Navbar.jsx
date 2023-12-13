@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const Navbar = () => {
   const [theme, setTheme] = useState('dark');
   const [padding, setPadding] = useState(false);
   const { user, logOut } = useAuth()
+  const [isAdmin , isLoading]=useAdmin()
+
+console.log(isAdmin);
+
+
   const list = <>
     <li> <NavLink to={"/"}>Home</NavLink> </li>
     <li> <NavLink to={"/addBook"}>Add Book</NavLink> </li>
