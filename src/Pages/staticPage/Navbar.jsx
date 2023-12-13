@@ -12,8 +12,8 @@ const Navbar = () => {
     <li> <NavLink to={"/"}>Home</NavLink> </li>
     <li> <NavLink to={"/addBook"}>Add Book</NavLink> </li>
     <li> <NavLink to={"/allBook"}>All Books</NavLink> </li>
-    <li> <NavLink to={"/borrowed"}>Borrowed Books</NavLink>  </li>
-
+    <li> <NavLink to={"/borrowed"}>Borrowed Books</NavLink></li>
+    <li><NavLink to={"/donate"}>Donate</NavLink></li>
   </>
 
   const toggleTheme = () => {
@@ -65,7 +65,8 @@ const Navbar = () => {
             <li onClick={handelP} > <NavLink to={"/"}>Home</NavLink> </li>
             <li onClick={handelPx} > <NavLink to={"/addBook"}>Add Book</NavLink> </li>
             <li onClick={handelPx} > <NavLink to={"/allBook"}>All Books</NavLink> </li>
-            <li onClick={handelPx} > <NavLink to={"/borrowed"}>Borrowed Books</NavLink>  </li>
+            <li onClick={handelPx} > <NavLink to={"/borrowed"}>Borrowed Books</NavLink></li>
+            <li onClick={handelPx} > <NavLink to={"/donate"}>Donate</NavLink></li>
           </ul>
         </div>
         <Link to={'/'} className="btn btn-ghost normal-case text-xl"><img className=" w-28 h-10" src="https://i.ibb.co/WzvggtD/logo.png" alt="Logo" /></Link>

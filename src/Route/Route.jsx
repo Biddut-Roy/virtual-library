@@ -12,6 +12,7 @@ import ReedMore from "../Pages/Home/categoryCard/ReedMore";
 import Books from "../Pages/AllBoks/Books";
 import Borrow from "../Pages/BorrowPage/Borrow";
 import Update from "../Pages/updatepage/Update";
+import Donate from "../Pages/Donate_Book/Donate";
 
 
 
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         {
           path: "/addBook",
           element: <Private><Add></Add></Private>,
+        },
+        {
+          path: "/donate",
+          element: <Private><Donate /></Private>,
         },
         {
           path: "/categoryCards/:category",
