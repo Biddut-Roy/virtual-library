@@ -13,6 +13,8 @@ import Books from "../Pages/AllBoks/Books";
 import Borrow from "../Pages/BorrowPage/Borrow";
 import Update from "../Pages/updatepage/Update";
 import Donate from "../Pages/Donate_Book/Donate";
+import AdminRoute from "../PrivateRoute/AdminRoute";
+import CheckDonation from "../Pages/Donate_Book/CheckDonation";
 
 
 
@@ -38,7 +40,11 @@ const router = createBrowserRouter([
         },
         {
           path: "/addBook",
-          element: <Private><Add></Add></Private>,
+          element: <AdminRoute><Add /></AdminRoute>,
+        },
+        {
+          path: "/checkDonate",
+          element: <AdminRoute><CheckDonation /></AdminRoute>,
         },
         {
           path: "/donate",

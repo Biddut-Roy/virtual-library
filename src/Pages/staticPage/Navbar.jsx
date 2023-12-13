@@ -8,13 +8,8 @@ import useAdmin from "../../Hooks/useAdmin";
 const Navbar = () => {
   const [theme, setTheme] = useState('dark');
   const [padding, setPadding] = useState(false);
-  const { user, logOut } = useAuth()
-  const [isAdmin] = useAdmin()
-
-  console.log(isAdmin);
-
-
-
+  const { user, logOut } = useAuth();
+  const [isAdmin] = useAdmin();
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
@@ -73,7 +68,6 @@ const Navbar = () => {
               <ul tabIndex={0} className="menu menu-sm bg-gray-700 dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
                 <li onClick={handelP} > <NavLink to={"/"}>Home</NavLink> </li>
                 <li onClick={handelPx} > <NavLink to={"/addBook"}>Add Book</NavLink> </li>
-                <li onClick={handelPx} > <NavLink to={"/allBook"}>All Books</NavLink> </li>
                 <li onClick={handelPx} > <NavLink to={"/borrowed"}>Borrowed Books</NavLink></li>
                 <li onClick={handelPx} > <NavLink to={"/donate"}>Donate</NavLink></li>
               </ul>
@@ -95,7 +89,6 @@ const Navbar = () => {
             :
             <ul className="menu menu-horizontal px-1">
               <li> <NavLink to={"/"}>Home</NavLink> </li>
-              <li> <NavLink to={"/allBook"}>All Books</NavLink> </li>
               <li> <NavLink to={"/borrowed"}>Borrowed Books</NavLink></li>
               <li><NavLink to={"/donate"}>Donate</NavLink></li>
             </ul>

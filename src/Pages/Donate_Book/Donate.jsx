@@ -29,13 +29,13 @@ const Donate = () => {
                         title: 'Success',
                         text: 'Book has been donate successfully',
                     })
+                    form.reset();
                 }
             })
             .catch(function (error) {
                 console.log(error);
             });
 
-        form.reset();
     };
 
     return (
