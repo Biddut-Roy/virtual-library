@@ -40,7 +40,7 @@ const GlobalAuth =({children})=> {
             setUser(currentUser);
             setLoader(false)
             if (currentUser) {
-                axios.post('https://virtual-library-eight.vercel.app/jwt', logger, { withCredentials: true })
+                axios.post('http://localhost:5000/jwt', logger, { withCredentials: true })
                     .then((res) => {
                         console.log(res.data);
                     })
@@ -49,7 +49,7 @@ const GlobalAuth =({children})=> {
                     });
             }
             else{
-                axios.post('https://virtual-library-eight.vercel.app/logout', logger, { withCredentials: true })
+                axios.post('http://localhost:5000/logout', logger, { withCredentials: true })
                 .then(res => {
                     console.log(res.data);
                 })

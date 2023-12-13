@@ -37,11 +37,11 @@ const Borrowedcard = ({ borrowed, setBorroweds, borroweds }) => {
             confirmButtonText: 'Yes, Return it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://virtual-library-eight.vercel.app/borrow/${id}`)
+                axios.delete(`http://localhost:5000/borrow/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             toast.success('Book Return successful')
-                            axios.patch(`https://virtual-library-eight.vercel.app/item-update/${mainId}`, qnt1)
+                            axios.patch(`http://localhost:5000/item-update/${mainId}`, qnt1)
                                 .then((res) => {
                                     console.log(res.data);
                                     if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
