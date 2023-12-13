@@ -9,18 +9,12 @@ const Navbar = () => {
   const [theme, setTheme] = useState('dark');
   const [padding, setPadding] = useState(false);
   const { user, logOut } = useAuth()
-  const [isAdmin , isLoading]=useAdmin()
+  const [isAdmin] = useAdmin()
 
-console.log(isAdmin);
+  console.log(isAdmin);
 
 
-  const list = <>
-    <li> <NavLink to={"/"}>Home</NavLink> </li>
-    <li> <NavLink to={"/addBook"}>Add Book</NavLink> </li>
-    <li> <NavLink to={"/allBook"}>All Books</NavLink> </li>
-    <li> <NavLink to={"/borrowed"}>Borrowed Books</NavLink></li>
-    <li><NavLink to={"/donate"}>Donate</NavLink></li>
-  </>
+
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
@@ -67,20 +61,45 @@ console.log(isAdmin);
           <label onClick={handelP} tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
           </label>
-          <ul tabIndex={0} className="menu menu-sm bg-gray-700 dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
-            <li onClick={handelP} > <NavLink to={"/"}>Home</NavLink> </li>
-            <li onClick={handelPx} > <NavLink to={"/addBook"}>Add Book</NavLink> </li>
-            <li onClick={handelPx} > <NavLink to={"/allBook"}>All Books</NavLink> </li>
-            <li onClick={handelPx} > <NavLink to={"/borrowed"}>Borrowed Books</NavLink></li>
-            <li onClick={handelPx} > <NavLink to={"/donate"}>Donate</NavLink></li>
-          </ul>
+          {
+            isAdmin?.isAdmin ?
+              <ul tabIndex={0} className="menu menu-sm bg-gray-700 dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
+                <li onClick={handelP} > <NavLink to={"/"}>Home</NavLink> </li>
+                <li onClick={handelPx} > <NavLink to={"/addBook"}>Add Book</NavLink> </li>
+                <li onClick={handelPx} > <NavLink to={"/allBook"}>All Books</NavLink> </li>
+                <li onClick={handelPx} > <NavLink to={"/checkDonate"}>Give Books</NavLink> </li>
+              </ul>
+              :
+              <ul tabIndex={0} className="menu menu-sm bg-gray-700 dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52">
+                <li onClick={handelP} > <NavLink to={"/"}>Home</NavLink> </li>
+                <li onClick={handelPx} > <NavLink to={"/addBook"}>Add Book</NavLink> </li>
+                <li onClick={handelPx} > <NavLink to={"/allBook"}>All Books</NavLink> </li>
+                <li onClick={handelPx} > <NavLink to={"/borrowed"}>Borrowed Books</NavLink></li>
+                <li onClick={handelPx} > <NavLink to={"/donate"}>Donate</NavLink></li>
+              </ul>
+          }
+
         </div>
         <Link to={'/'} className="btn btn-ghost normal-case text-xl"><img className=" w-28 h-10" src="https://i.ibb.co/WzvggtD/logo.png" alt="Logo" /></Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {list}
-        </ul>
+
+        {
+          isAdmin?.isAdmin ?
+            <ul className="menu menu-horizontal px-1">
+              <li> <NavLink to={"/"}>Home</NavLink> </li>
+              <li> <NavLink to={"/addBook"}>Add Book</NavLink> </li>
+              <li> <NavLink to={"/allBook"}>All Books</NavLink> </li>
+              <li> <NavLink to={"/checkDonate"}>Give Books</NavLink> </li>
+            </ul>
+            :
+            <ul className="menu menu-horizontal px-1">
+              <li> <NavLink to={"/"}>Home</NavLink> </li>
+              <li> <NavLink to={"/allBook"}>All Books</NavLink> </li>
+              <li> <NavLink to={"/borrowed"}>Borrowed Books</NavLink></li>
+              <li><NavLink to={"/donate"}>Donate</NavLink></li>
+            </ul>
+        }
       </div>
       <div className="navbar-end space-x-2">
         <div className="hidden md:flex lg:flex">
