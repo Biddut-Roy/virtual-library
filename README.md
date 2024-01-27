@@ -7,7 +7,7 @@
 ## Used Technology 
  - React.js/Express.js/NOde.js/Tailwind/Html/css/zegocloud
 
-## Total 5 features of my Project :
+## Total 5 features of my Project:
 
 - I have 4 category books in this library.
 - Books can be seen according to category and all books can be seen on All Book button and on this page all books and quantity can be checked.
